@@ -12,7 +12,7 @@
 #define ICMP_HDRLEN 8
 
 #define USAGE "Usage: p1ng [OPTIONS] <DSTIP>\n\n" \
-              "Commands:\n" \
+              "Options:\n" \
               "  -d  DATA     Payload data to send\n" \
               "  -h           Display this usage information\n" \
               "  -m           Set the More Fragments (MF) flag in the IP header\n" \
@@ -22,7 +22,7 @@
 unsigned short checksum(char* buf, int left) {
   long sum = 0;
   unsigned short* words = (unsigned short*)buf;
-  
+
   while (left > 1) {
     sum += *words++;
     left -= 2;
@@ -75,7 +75,7 @@ int ping(int sockfd, struct sockaddr_in* dstaddr, struct ip* ip, struct icmp* ic
   int left = ip->ip_len;
   char* ptr = (char*)ip;
   int sent;
-  
+
   while (left) {
     sent = sendto(sockfd, ptr, left, 0, (struct sockaddr*)dstaddr, sizeof(struct sockaddr));
 
@@ -98,7 +98,7 @@ int ping(int sockfd, struct sockaddr_in* dstaddr, struct ip* ip, struct icmp* ic
 
     while (left) {
       rcvd = recv(sockfd, ptr, left, 0);
-      
+
       if (rcvd == -1) {
         perror("recv");
         return -1;
@@ -151,7 +151,7 @@ int main(int argc, char** argv) {
   if (srcip != NULL || waitsecs <= 0) {
     waitsecs = 0;
   }
-  
+
   if (help) {
     printf("%s\n", USAGE);
     return 0;
@@ -233,7 +233,7 @@ int main(int argc, char** argv) {
 
   if (waitsecs) {
     printf("Got reply!\n");
-    
+
     if (dlen) {
       printf("'%s'\n", data);
     }

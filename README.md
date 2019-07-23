@@ -22,7 +22,7 @@ When using `p1ng`, I recommend running tcpdump or wireshark so you can check pac
 ```
 Usage: p1ng [OPTIONS] <DSTIP>
 
-Commands:
+Options:
   -d  DATA     Payload data to send
   -h           Display this usage information
   -m           Set the More Fragments (MF) flag in the IP header
